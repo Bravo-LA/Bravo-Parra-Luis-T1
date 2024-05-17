@@ -1,0 +1,110 @@
+<div class="container-fluid container-custom w-100 vh-100 ">
+    <nav class="navbar bg-transparent">
+        <div class="navbar-brand d-flex align-items-center">
+            <img src="assets/image/logo.png" class="object-fit-cover" alt="Logo" height="80">
+            <div class="d-flex flex-column ps-4">
+                <span class="font-kanit fw-semibold" style="font-size: x-large;">BRAVO PARRA LUIS ADRIAN</span>
+                <span class="font-kanit fw-semibold" style="font-size: xx-small;"># 12</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row row-cols-2 pt-2">
+        <div class="col">
+            <div class="card bg-white rounded-3 shadow-sm border-black w-50 mx-auto">
+                <div class="card-header bg-transparent border-black">
+                    <span class="font-kanit fw-semibol fs-6">Solicita tu equipo</span>
+                </div>
+
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <div class="card-body my-2">
+
+                        <label for="input-nombre" class="form-label m-0">Nombres solicitante</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text border-black">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            <input type="text" class="form-control border-black" id="input-nombre"
+                                formControlName="solicitante">
+                        </div>
+
+                        <label for="input-categoria" class="form-label m-0">Categoría del equipo</label>
+                        <div class="input-group input-group-sm mb-3 ">
+                            <span class="input-group-text border-black">
+                                <i class="bi bi-border-width"></i>
+                            </span>
+                            <select id="input-categorias" class="form-control border-black" formControlName="categoria">
+                                @for (item of categorias; track $index) {
+                                <option [value]="item.id">{{item.nombre}}</option>
+                                }
+                            </select>
+                        </div>
+
+                        <label for="input-fecha-entrega" class="form-label m-0">Fecha entrega</label>
+                        <div class="input-group input-group-sm mb-3 ">
+                            <span class="input-group-text border-black">
+                                <i class="bi bi-calendar2-event-fill"></i>
+                            </span>
+                            <input type="date" class="form-control border-black" id="input-fecha-entrega"
+                                formControlName="fechaEntrega">
+                        </div>
+
+                        <label for="input-fecha-devolucion" class="form-label m-0">Fecha devolución</label>
+                        <div class="input-group input-group-sm mb-3 ">
+                            <span class="input-group-text border-black">
+                                <i class="bi bi-calendar2-minus-fill"></i>
+                            </span>
+                            <input type="date" class="form-control border-black" id="input-fecha-devolucion"
+                                formControlName="fechaRegreso">
+                        </div>
+
+                        <label for="input-direccion" class="form-label m-0">Dirección</label>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text border-black">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </span>
+                            <input type="text" class="form-control border-black" id="input-direccion"
+                                formControlName="direccion">
+                        </div>
+
+                        <button type="submit" class="btn btn-sm mt-2 text-white w-100"
+                            style="background-color: #1B2050;">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-sm mb-2 text-white w-25 rounded-3" style="background-color: #1B2050;" (click)="information()">
+                <span class="font-kanit">Cantidad de solicitudes</span>
+            </button>
+            <div class="card bg-white rounded-3 shadow-sm border-black mx-auto p-1">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Solicitante</th>
+                            <th>Categoría</th>
+                            <th>Entrega</th>
+                            <th>Devolución</th>
+                            <th>Dirección</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of equipos; track $index) {
+                        <tr>
+                            <td>{{item.solicitante}}</td>
+                            <td>{{item.categoria | categorianame}}</td>
+                            <td>{{item.fechaEntrega}}</td>
+                            <td>{{item.fechaRegreso}}</td>
+                            <td>{{item.direccion}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
